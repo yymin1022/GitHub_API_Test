@@ -55,9 +55,11 @@ const getOrganizationMembers = () => {
             per_page: 100
         })
         .then(res => {
+            let memberArr: Array<string> = [];
             res["data"].forEach((memberItem) => {
-                console.log(memberItem["login"]);
-            })
+                memberArr.push(memberItem["login"]);
+            });
+            console.log(memberArr);
         })
 }
 
