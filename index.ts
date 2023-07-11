@@ -29,7 +29,7 @@ const getOrganizationInfo = () => {
             org: "GDSC-CAU"
         })
         .then(res => {
-            console.log(res);
+            console.log(res["data"]);
         })
 }
 
@@ -41,7 +41,7 @@ const getOrganizationMembers = () => {
             org: "GDSC-CAU"
         })
         .then(res => {
-            console.log(res);
+            console.log(res["data"]);
         })
 }
 
