@@ -12,15 +12,6 @@ const authTest = () => {
     });
 }
 
-const testOctokit = () => {
-    octokit.request(
-        "GET /octocat",
-        {})
-        .then(res => {
-            console.log(res);
-        });
-}
-
 const getCommitCount = () => {
     octokit.request(
         "GET /repos/{owner}/{repo}/stats/contributors",
@@ -64,7 +55,6 @@ const getOrganizationMembers = () => {
 }
 
 authTest();
-testOctokit();
 
 getOrganizationInfo();
 getOrganizationMembers();
