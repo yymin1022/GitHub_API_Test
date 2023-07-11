@@ -4,11 +4,20 @@ import {Octokit} from "octokit";
 dotenv.config();
 const GITHUB_TOKEN = process.env["GITHUB_TOKEN"];
 
-const authTest = async () => {
-    const octokit = new Octokit({
+let octokit: Octokit;
+
+const authTest = () => {
+    octokit = new Octokit({
         auth: GITHUB_TOKEN
     });
-    console.log(await octokit.auth());
+}
+
+const testOctokit = () => {
+    octokit.request("GET /octocat")
+        .then(res => {
+            console.log(res);
+        });
 }
 
 authTest();
+testOctokit()
