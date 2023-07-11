@@ -21,6 +21,19 @@ const testOctokit = () => {
         });
 }
 
+const getCommitCount = () => {
+    octokit.request(
+        "GET /repos/{owner}/{repo}/stats/contributors",
+        {
+            owner: "GDSC-CAU",
+            repo: "GDSC-SPACE",
+            headers: {"X-GitHub-Api-Version": "2022-11-28"}
+        })
+        .then(res => {
+            console.log(res["data"]);
+        })
+}
+
 // https://docs.github.com/ko/rest/orgs/orgs?apiVersion=2022-11-28#get-an-organization
 const getOrganizationInfo = () => {
     octokit.request(
@@ -53,3 +66,5 @@ testOctokit();
 
 getOrganizationInfo();
 getOrganizationMembers();
+
+getCommitCount();
