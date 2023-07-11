@@ -19,5 +19,17 @@ const testOctokit = () => {
         });
 }
 
+// https://docs.github.com/ko/rest/orgs/orgs?apiVersion=2022-11-28#get-an-organization
+const getOrganizationInfo = () => {
+    octokit.request("GET /orgs/{org}", {
+        org: "GDSC-CAU"
+    })
+        .then(res => {
+            console.log(res);
+        })
+}
+
 authTest();
-testOctokit()
+testOctokit();
+
+getOrganizationInfo();
