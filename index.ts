@@ -38,10 +38,13 @@ const getOrganizationMembers = () => {
     octokit.request(
         "GET /orgs/{org}/members",
         {
-            org: "GDSC-CAU"
+            org: "GDSC-CAU",
+            per_page: 100
         })
         .then(res => {
-            console.log(res["data"]);
+            res["data"].forEach((memberItem) => {
+                console.log(memberItem["login"]);
+            })
         })
 }
 
