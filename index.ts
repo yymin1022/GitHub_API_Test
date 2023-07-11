@@ -12,6 +12,7 @@ const authTest = () => {
     });
 }
 
+// https://docs.github.com/ko/rest/metrics/statistics?apiVersion=2022-11-28#get-all-contributor-commit-activity
 const getCommitCount = () => {
     octokit.request(
         "GET /repos/{owner}/{repo}/stats/contributors",
