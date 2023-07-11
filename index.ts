@@ -33,7 +33,20 @@ const getOrganizationInfo = () => {
         })
 }
 
+// https://docs.github.com/ko/rest/orgs/members?apiVersion=2022-11-28#list-organization-members
+const getOrganizationMembers = () => {
+    octokit.request(
+        "GET /orgs/{org}/members",
+        {
+            org: "GDSC-CAU"
+        })
+        .then(res => {
+            console.log(res);
+        })
+}
+
 authTest();
 testOctokit();
 
 getOrganizationInfo();
+getOrganizationMembers();
