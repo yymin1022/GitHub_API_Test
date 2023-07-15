@@ -1,15 +1,12 @@
 import dotenv from "dotenv";
 import {Octokit} from "octokit";
 
+import {OctoResult} from "./DataClass";
+
 dotenv.config();
 const GITHUB_TOKEN = process.env["GITHUB_TOKEN"];
 
 let octokit: Octokit
-
-export interface OctoResult {
-    success: boolean,
-    result: any
-}
 
 export const initOctokit = () => {
     if(octokit === undefined){
