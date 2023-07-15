@@ -6,7 +6,7 @@ const GITHUB_TOKEN = process.env["GITHUB_TOKEN"];
 
 let octokit: Octokit
 
-const initOctokit = () => {
+export const initOctokit = () => {
     if(octokit !== undefined){
         octokit = new Octokit({
             auth: GITHUB_TOKEN
@@ -14,7 +14,7 @@ const initOctokit = () => {
     }
 }
 
-const sendOctoAPI = async (path: string, data: any) => {
+export const sendOctoAPI = async (path: string, data: any) => {
     await octokit.request(path, data)
         .then(res => {
             console.log(res["data"]);
