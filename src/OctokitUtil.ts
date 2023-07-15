@@ -14,6 +14,12 @@ const initOctokit = () => {
     }
 }
 
-const getOctokitAPI = (path: string, data: object) => {
-
+const sendOctoAPI = async (path: string, data: any) => {
+    await octokit.request(path, data)
+        .then(res => {
+            console.log(res["data"]);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
 }
