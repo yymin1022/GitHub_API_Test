@@ -1,3 +1,4 @@
+import {MemberSimpleData} from "./DataClass";
 import * as OctoUtil from "./OctokitUtil";
 
 // https://docs.github.com/ko/rest/metrics/statistics?apiVersion=2022-11-28#get-all-contributor-commit-activity
@@ -31,7 +32,28 @@ const getOrganizationMembers = async () => {
             per_page: 100
         }
     ));
-}=
+}
+
+const getOrganizationMembersSimple = async () => {
+    let memberList: Array<MemberSimpleData> = [];
+    let memberData = await OctoUtil.sendOctoAPI(
+        "GET /orgs/{org}/members",
+        {
+            org: "GDSC-CAU",
+            per_page: 100
+        }
+    );
+
+    memberData["result"].forEach((memberItem: any) => {
+        memberList.push({
+            avatar_url: memberItem["avatar_url"],
+            html_url: memberItem["html_url"],
+            login: memberItem["login"]
+        });
+    });
+
+    return memberList;
+}
 
 const test = async () => {
     OctoUtil.initOctokit();
@@ -39,6 +61,7 @@ const test = async () => {
     // console.log(await getCommitCount());
     // console.log(await getOrganizationInfo());
     // console.log(await getOrganizationMembers());
+    // console.log(await getOrganizationMembersSimple());
 }
 
 test();
