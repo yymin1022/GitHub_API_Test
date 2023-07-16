@@ -3,14 +3,29 @@ import * as OctoUtil from "./OctokitUtil";
 
 // https://docs.github.com/ko/rest/metrics/statistics?apiVersion=2022-11-28#get-all-contributor-commit-activity
 const getCommitCount = async () => {
-    return (await OctoUtil.sendOctoAPI(
-        "GET /repos/{owner}/{repo}/stats/contributors",
+    let repoList = await OctoUtil.sendOctoAPI(
+        "GET /orgs/{org}/repos",
         {
-            owner: "GDSC-CAU",
-            repo: "GDSC-SPACE",
-            headers: {"X-GitHub-Api-Version": "2022-11-28"}
+            org: "GDSC-CAU"
         }
-    ));
+    );
+
+    let contribCnt = 0;
+    for (const repoItem of repoList["result"]) {
+        let repoData = await OctoUtil.sendOctoAPI(
+            "GET /repos/{owner}/{repo}/stats/contributors",
+            {
+                owner: "GDSC-CAU",
+                repo: repoItem["name"]
+            }
+        );
+
+        for(let i = 0; i < repoData["result"].length; i++){
+            contribCnt += repoData["result"][i]["total"];
+        }
+        console.log(repoItem["name"])
+    }
+    return contribCnt;
 }
 
 // https://docs.github.com/ko/rest/orgs/orgs?apiVersion=2022-11-28#get-an-organization
@@ -58,7 +73,7 @@ const getOrganizationMembersSimple = async () => {
 const test = async () => {
     OctoUtil.initOctokit();
 
-    // console.log(await getCommitCount());
+    console.log(await getCommitCount());
     // console.log(await getOrganizationInfo());
     // console.log(await getOrganizationMembers());
     // console.log(await getOrganizationMembersSimple());
